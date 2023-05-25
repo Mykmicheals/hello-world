@@ -13,7 +13,9 @@ function Login() {
     password: "",
   });
 
-   const addToken = useStoreActions((actions: any) => actions.addToken);
+  const addToken = useStoreActions((actions: any) => actions.addToken);
+  const addAdmin = useStoreActions((actions: any) => actions.changeAdmin);
+
 
   async function loginHandler() {
     try {
@@ -36,7 +38,9 @@ function Login() {
       if (result.detail) {
         setLoginErr(true);
       } else {
-          addToken(result.access)
+        addToken(result.access)
+        addAdmin(true?result.is_admin===true:false)
+        
         navigate("/dashboard");
       }
 
